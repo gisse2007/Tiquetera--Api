@@ -7,7 +7,7 @@ import TiqueteraRepositoryMongo from "../repositories/TiqueteraRepositoryMongo.j
  
 const tiqueteraRepository = new TiqueteraRepositoryMongo();
 
-export const createCliente = async (req, res) => {
+export const createTiquetera = async (req, res) => {
   try {
     const createTiquetera = new CreateTiquetera(tiqueteraRepository);
     const tiquetera = await createTiquetera.execute(req.body);
@@ -39,8 +39,12 @@ export const getTiqueteraById = async (req, res) => {
 
 export const putTiqueteraById = async (req, res) => {
   try {
-    const putTiqueteraById = new PutTiqueteraById(tiqueteraRepository);
-    const tiquetera = await putTiqueteraById.execute(req.params.id, req.body);
+    const useCase = new PutTiqueteraById(tiqueteraRepository);
+    const tiquetera = await useCase.execute(req.params.id, req.body.saldo);
+
+    if (!tiquetera) {
+      return res.status(404).json({ error: "Tiquetera no encontrada" });
+    }
     res.status(200).json(tiquetera);
   } catch (err) {
     res.status(500).json({ error: err.message });
