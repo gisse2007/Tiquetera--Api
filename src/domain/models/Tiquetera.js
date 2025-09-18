@@ -4,13 +4,15 @@ class Tiquetera {
     nroTiquetera,
     cliente,
     saldo,
-    totalTransacciones
+    totalTransacciones,
+    observaciones
   }) {
     this.id = id;
     this.nroTiquetera = nroTiquetera;
     this.cliente = cliente;
     this.saldo = saldo;
-    this.totalTransacciones = totalTransacciones ?? 0; 
+    this.totalTransacciones = totalTransacciones ?? 0;
+    this.observaciones = observaciones ?? ''; 
   }
 }
 

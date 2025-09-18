@@ -5,6 +5,7 @@ const TiqueteraSchema = new mongoose.Schema({
   cliente: { type: String, required: true },
   saldo: { type: Number, default: 0, required: true },
   totalTransacciones: { type: Number, default: 0 },
+  observaciones: { type: String, default: '' }
 });
 
 const TiqueteraModel = mongoose.model("Tiquetera", TiqueteraSchema);
