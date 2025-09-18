@@ -4,19 +4,15 @@ class PutTiqueteraById {
   }
 
   async execute(id, saldo) {
-    const tiqueteraActual = await this.tiqueteraRepository.findById(id);
-    if (!tiqueteraActual) {
+    const tiqueteraActualizada = await this.tiqueteraRepository.incrementarTransaccion(id, saldo);
+
+    if (!tiqueteraActualizada) {
       throw new Error(`Tiquetera no encontrada`);
     }
-    const nuevoContador = (tiqueteraActual.contadorTransacciones || 0) + 1;
-
-    await this.tiqueteraRepository.updateById(id, {
-      saldo,
-      contadorTransacciones: nuevoContador,
-    });
-    return this.tiqueteraRepository.findById(id);
+    return tiqueteraActualizada;
   }
 }
 
 export default PutTiqueteraById;
+
 

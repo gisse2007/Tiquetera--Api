@@ -15,4 +15,3 @@ class Tiquetera {
 }
 
 export default Tiquetera;
-

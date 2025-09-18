@@ -4,7 +4,7 @@ const TiqueteraSchema = new mongoose.Schema({
   nroTiquetera: { type: String, required: true },
   cliente: { type: String, required: true },
   saldo: { type: Number, default: 0, required: true },
-  contadorTransacciones: { type: Number, default: 0 },
+  totalTransacciones: { type: Number, default: 0 },
 });
 
 const TiqueteraModel = mongoose.model("Tiquetera", TiqueteraSchema);
@@ -36,17 +36,17 @@ class TiqueteraRepositoryMongo {
       id,
       {
         $set: { saldo },         
-        $inc: { contadorTransacciones: 1 }, 
+        $inc: { totalTransacciones: 1 }, 
       },
       { new: true }
     );
   }
-  async inicializarContadores() {
-    return await TiqueteraModel.updateMany(
-      { contadorTransacciones: { $exists: false } },
-      { $set: { contadorTransacciones: 0 } }
-    );
-  }
+  // async inicializarContadores() {
+  //   return await TiqueteraModel.updateMany(
+  //     { contadorTransacciones: { $exists: false } },
+  //     { $set: { contadorTransacciones: 0 } }
+  //   );
+  // }
 }
 
 export default TiqueteraRepositoryMongo;
